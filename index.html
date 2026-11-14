@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .vertical-line {
+            position: fixed;
+            left: 50%;
+            top: 7.1429vh;
+            height: 85.7143vh;
+            width: 1vw;
+            background-color: black;
+            transform: translateX(-50%)
+        }
+
+        .big-horizontal-line {
+            position: fixed;
+            left: 50%;
+            width: 30vw;
+            height: 1.5vh;
+            background-color: black;
+            transform: translateX(-50%);
+        }
+
+        .middle-horizontal-line {
+            position: fixed;
+            left: 50%;
+            width: 25vw;
+            height: 1.5vh;
+            background-color: black;
+            transform: translateX(-50%);
+        }
+
+        .thin-horizontal-line {
+            position: fixed;
+            left: 50%;
+            width: 10vw;
+            height: 0.5vh;
+            background-color: black;
+            transform: translateX(-50%);
+        }
+
+        .big-horizontal-line-clickbox,
+        .middle-horizontal-line-clickbox,
+        .thin-horizontal-line-clickbox {
+            position: fixed;
+            left: 50%;
+            width: 30vw;
+            height: 7.1429vh;
+            transform: translate(-50%, -50%);
+        }
+
+        #l6 {
+            top: 7.1429vh;
+        }
+
+        #l5 {
+            top: 14.2857vh;
+        }
+
+        #l4 {
+            top: 21.4286vh;
+        }
+
+        #l3 {
+            top: 28.5714vh;
+        }
+
+        #l2 {
+            top: 35.7143vh;
+        }
+
+        #l1 {
+            top: 42.8571vh;
+        }
+
+        #l0 {
+            top: 50vh;
+        }
+
+        #l-1 {
+            top: 57.1429vh;
+        }
+
+        #l-2 {
+            top: 64.2857vh;
+        }
+
+        #l-3 {
+            top: 71.4286vh;
+        }
+
+        #l-4 {
+            top: 78.5714vh;
+        }
+
+        #l-5 {
+            top: 85.7143vh;
+        }
+
+        #l-6 {
+            top: 92.8571vh;
+        }
+
+        #panel {
+            position: fixed;
+            top: 2vh;
+            left: 65.5%;
+            width: 100vw;
+            height: 98vh;
+            background-color: #aaaaaa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        #panel-name-list {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
+        }
+
+        #panel-name-input {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
+            margin-left: 1%;
+        }
+
+        #panel-add-name-image {
+            width: 24px;
+            height: 24px;
+        }
+
+        #export-image {
+            width: 48px;
+        }
+
+        #import-image {
+            width: 48px;
+        }
+
+        #export-import-panel {
+            position: fixed;
+            top: 30vh;
+            transform: translateY(50%);
+        }
+
+        #export {
+            margin-bottom: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="vertical-line"></div>
+    <div class="big-horizontal-line" id="l6">
+        <div class="big-horizontal-line-clickbox" id="c6"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l5">
+        <div class="thin-horizontal-line-clickbox" id="c5"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l4">
+        <div class="thin-horizontal-line-clickbox" id="c4"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l3">
+        <div class="thin-horizontal-line-clickbox" id="c3"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l2">
+        <div class="thin-horizontal-line-clickbox" id="c2"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l1">
+        <div class="thin-horizontal-line-clickbox" id="c1"></div>
+    </div>
+    <div class="middle-horizontal-line" id="l0">
+        <div class="middle-horizontal-line-clickbox" id="c0"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l-1">
+        <div class="thin-horizontal-line-clickbox" id="c-1"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l-2">
+        <div class="thin-horizontal-line-clickbox" id="c-2"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l-3">
+        <div class="thin-horizontal-line-clickbox" id="c-3"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l-4">
+        <div class="thin-horizontal-line-clickbox" id="c-4"></div>
+    </div>
+    <div class="thin-horizontal-line" id="l-5">
+        <div class="thin-horizontal-line-clickbox" id="c-5"></div>
+    </div>
+    <div class="big-horizontal-line" id="l-6">
+        <div class="big-horizontal-line-clickbox" id="c-6"></div>
+    </div>
+    <div id="panel">
+        <ul id="panel-name-list"></ul>
+        <input type="text" id="panel-name-input" placeholder="Enter name">
+        <button id="panel-add-name">
+            <img src="add-name.png" alt="Add Name" id="panel-add-name-image">
+        </button>
+    </div>
+    <div id="export-import-panel">
+        <button id="export">
+            <img src="export.png" alt="Export" id="export-image">
+        </button>
+        <br />
+        <button id="import">
+            <img src="import.png" alt="Import" id="import-image">
+        </button>
+        <input type="file" id="import-file" accept=".json" style="display: none;">
+    </div>
+
+    <script>
+        function mouseEnterHandler(event) {
+            const clickboxId = event.target.id;
+            const lineId = "l" + clickboxId.substring(1);
+            const lineElement = document.getElementById(lineId);
+            if (lineElement) {
+                lineElement.style.backgroundColor = "#008cff";
+            }
+        }
+        function mouseLeaveHandler(event) {
+            const clickboxId = event.target.id;
+            const lineId = "l" + clickboxId.substring(1);
+            const lineElement = document.getElementById(lineId);
+            if (lineElement) {
+                lineElement.style.backgroundColor = "black";
+            }
+        }
+
+        function clickHandler(event) {
+            const clickboxId = event.target.id;
+            const lineId = "l" + clickboxId.substring(1);
+            const lineElement = document.getElementById(lineId);
+            if (lineElement) {
+                showPanel(lineId.substring(1));
+            }
+        }
+
+        for (let i = -6; i <= 6; i++) {
+            const clickboxId = "c" + i;
+            const clickboxElement = document.getElementById(clickboxId);
+            if (clickboxElement) {
+                clickboxElement.addEventListener("mouseenter", mouseEnterHandler);
+                clickboxElement.addEventListener("mouseleave", mouseLeaveHandler);
+                clickboxElement.addEventListener("click", clickHandler);
+            }
+        }
+
+        let nameTable = {};
+        let lineNumber;
+
+        function showPanel(line) {
+            lineNumber = line;
+            const panel = document.getElementById("panel");
+            panel.style.display = "block";
+            const nameList = document.getElementById("panel-name-list");
+            nameList.innerHTML = "";
+            const names = nameTable[lineNumber];
+            if (names) {
+                names.forEach(name => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = name;
+                    nameList.appendChild(listItem);
+                });
+            }
+        }
+
+        function addName() {
+            const nameInput = document.getElementById("panel-name-input");
+            const name = nameInput.value.trim();
+            if (name) {
+                const panel = document.getElementById("panel");
+                if (!nameTable[lineNumber]) {
+                    nameTable[lineNumber] = [];
+                }
+                nameTable[lineNumber].push(name);
+                const nameList = document.getElementById("panel-name-list");
+                const listItem = document.createElement("li");
+                listItem.textContent = name;
+                nameList.appendChild(listItem);
+                nameInput.value = "";
+            }
+        }
+
+        const addNameButton = document.getElementById("panel-add-name");
+        addNameButton.addEventListener("click", addName);
+        const nameInput = document.getElementById("panel-name-input");
+        nameInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                addName();
+            }
+        });
+
+        function downloadFile(filename, content, mimeType = "text/plain") {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+
+            a.click();
+
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        const exportButton = document.getElementById("export");
+        exportButton.addEventListener("click", () => {
+            downloadFile("voice-scale.json", JSON.stringify(nameTable, null, 4), "application/json");
+        });
+        const importButton = document.getElementById("import");
+        importButton.addEventListener("click", () => {
+            document.getElementById("import-file").click();
+        });
+
+        document.getElementById("import-file").addEventListener("change", async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            nameTable = JSON.parse(await file.text());
+        });
+    </script>
+</body>
+
+</html>
